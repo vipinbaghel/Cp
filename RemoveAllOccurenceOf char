@@ -1,0 +1,12 @@
+void removeAllOccurrencesOfChar(char input[], char c) {
+    // Write your code here
+    int k=0;
+    int i=0;
+    for(; input[i]!='\0'; i++){
+        if(input[i] != c){
+            input[k] = input[i];
+            k++;
+        }
+    }
+    input[k] = '\0';
+}
