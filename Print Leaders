@@ -1,0 +1,22 @@
+void Leaders(int* arr,int len)
+{
+	/* Don't write main().
+	 * Don't read input, it is passed as function argument.
+	 * Print your output exactly in the same format as shown. 
+	 * Don't print any extra line.
+	*/
+    
+    for(int i=0; i<len; i++){
+        bool isPresent = true;
+        for(int j=i; j<len; j++){
+            if(arr[i]<arr[j]){
+                isPresent = false;
+            }
+        }
+        if(isPresent){
+            cout<<arr[i]<<" ";
+        }
+    
+    }
+    //cout<<arr[len-1];
+}
