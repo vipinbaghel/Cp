@@ -1,0 +1,68 @@
+/*
+	To apply the method explained in the hint video, we have to add two more parameters in the function call. This can be done by calling a helper function from given function. The helper function can have three parameters: array, start index, end index.  
+	
+	Skeleton code to achieve this:
+	#include <iostream>
+	using namespace std;
+	
+	void quickSort(int input[], int start, int end)
+	{
+    		// your code goes here 
+	}
+	void quickSort(int input[], int size)
+	{
+    		quickSort(input, 0, size - 1);
+	}
+		
+*/
+
+#include <iostream>
+using namespace std;
+
+int pattern(int input[], int si, int ei)
+{
+    int pivot=input[si];
+    int count =0;
+    for(int i=si+1; i<=ei; i++)
+    {
+        if(input[i]<=input[si])
+        {
+            count++;
+        }
+    }
+   int pivotIndex = si+ count;
+    int temp=input[si];
+    input[si]=input[pivotIndex];
+    input[pivotIndex]=temp;
+
+    for(int i=si, j=ei; i<pivotIndex;) 
+    {
+         if(input[i]<=pivot){
+         i++;}
+        else if(input[j]>pivot){
+        j--;}
+        else
+        {
+         int temp2=input[i];
+            input[i]=input[j];
+            input[j]=temp2; 
+            i++;
+            j--;
+        }
+    }
+
+    return pivotIndex;
+}
+void quickSortFun(int input[], int si, int ei)
+{
+    if(si>=ei)
+    {
+        return;
+    }
+    int pivot=pattern(input, si, ei);
+    quickSortFun(input, si, pivot-1);
+    quickSortFun(input, pivot+1, ei);
+}
+void quickSort(int input[], int size) {
+	quickSortFun(input, 0, size-1);
+}
