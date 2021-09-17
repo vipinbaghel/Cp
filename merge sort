@@ -1,0 +1,51 @@
+void merge(int input[],int start, int mid, int end){
+    int n1 = mid+1-start;
+    int n2 = end-mid;
+    int arr1[n1];
+    for(int i=0; i<n1; i++){
+       arr1[i] = input[start+i];
+    }
+    int arr2[n2];
+    for(int i=0; i<n2; i++){
+        arr2[i] = input[mid+1+i];
+    }
+    
+    int i=0;
+    int j=0;
+    int k=start;
+    while(i<n1 && j<n2){
+        if(arr1[i] <= arr2[j]){
+            input[k] = arr1[i];
+            i++;
+        } else{
+            input[k] = arr2[j];
+            j++;
+        }
+        k++;
+            
+    }
+    while(i<n1){
+        input[k++] = arr1[i++];
+    }
+    
+    while(j<n2){
+        input[k++] = arr2[j++];
+    }
+}
+
+void mergeSort(int input[],int start ,int end){
+    if(start >= end){
+        return;
+    }
+    
+    int mid = (start+end)/2;
+    mergeSort(input,start,mid);
+    mergeSort(input,mid+1, end);
+    merge(input,start,mid,end);
+}
+
+void mergeSort(int input[], int size){
+	// Write your code here
+    mergeSort(input,0,size-1);
+        
+}
