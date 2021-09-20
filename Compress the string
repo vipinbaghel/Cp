@@ -1,0 +1,24 @@
+string getCompressedString(string &input) {
+    // Write your code here.
+    
+    string s="";
+    for(int i=0; i<input.size();){
+        int count = 1;
+        int j=i+1;
+        while(j<input.size() && input[i] == input[j]){
+            count++;
+            j++;
+        }
+        
+        s.push_back(input[i]);
+        if(count>1){
+            s.push_back(count+'0');
+        }
+        i=i+count;
+    }
+    
+    
+    return s;
+    
+    
+}
