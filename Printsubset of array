@@ -1,0 +1,23 @@
+void printSubsets_helper(int input[], int size, int output[], int n){
+    if(size == 0){
+        for(int i=0; i<n; i++){
+            cout<<output[i]<<" ";
+            
+        }
+        cout<<endl;
+        return;
+    }
+    
+    printSubsets_helper(input+1,size-1,output,n);
+    output[n] = input[0];
+    printSubsets_helper(input+1,size-1,output,++n);
+}
+
+
+void printSubsetsOfArray(int input[], int size) {
+	// Write your code here
+    
+    int arr[size];
+    printSubsets_helper(input ,size,arr, 0);
+    
+}
