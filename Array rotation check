@@ -1,0 +1,12 @@
+int arrayRotateCheck(int *input, int size)
+{
+    //Write your code here
+    int small = input[0];
+    for(int i=1; i<size; i++){
+        if(input[i]<small){
+            return i;
+        }
+    }
+    
+    return 0;
+}
