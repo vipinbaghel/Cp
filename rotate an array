@@ -1,0 +1,15 @@
+void rotate(int *input, int d, int n)
+{
+    //Write your code here
+    int temp[d];
+    for(int i=0; i<d; i++){
+        temp[i] = input[i];
+    }
+    
+    for(int i=0; i<n-d; i++){
+        input[i] = input[d+i];
+    }
+    for(int i=n-d; i<n; i++){
+        input[i] = temp[i-n+d];
+    }
+}
