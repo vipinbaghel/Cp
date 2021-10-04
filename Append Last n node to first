@@ -1,0 +1,49 @@
+/****************************************************************
+ 
+    Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+	        int data;
+	        Node *next;
+	        Node(int data)
+	        {
+		        this->data = data;
+		        this->next = NULL;
+	        }
+        };
+
+*****************************************************************/
+
+Node *appendLastNToFirst(Node *head, int n)
+{
+    //Write your code here
+    if(head == NULL || n==0){
+        return head;
+    }
+    int total = 0;
+    Node* t = head;
+    while(t != NULL){
+        total++;
+        t = t->next;
+    }
+    int count =0;
+    Node* temp = head;
+    while(count < total - n-1 && temp != NULL){
+        temp = temp->next;
+        count++;
+    }
+    Node *original_head = head;
+    head = temp->next;
+    temp->next = NULL;
+    
+    temp = head;
+    while(temp->next != NULL){
+        temp = temp ->next;
+    }
+    
+    temp -> next = original_head;
+    
+    return head;
+}
