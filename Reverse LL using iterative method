@@ -1,0 +1,22 @@
+Node *reverseLinkedList(Node *head) {
+    // Write your code here
+    if(head == NULL){
+        return head;
+    }
+    
+    Node *pre = NULL;
+    Node* curr = head;
+
+    
+    while(curr != NULL){
+        Node* agla = curr -> next;
+        curr -> next = pre;
+        pre = curr;
+        curr = agla;
+        agla = agla -> next;
+    }
+    
+    head = pre;
+    
+    return head;
+}
