@@ -1,0 +1,44 @@
+Node *evenAfterOdd(Node *head)
+{
+	//write your code here
+    if(head == NULL || head -> next == NULL){
+        return head;
+    }
+    Node *oddh = NULL;
+    Node *oddt = NULL;
+    Node* evenh = NULL;
+    Node *event = NULL;
+    Node *temp = head;
+    while(temp != NULL){
+        if((temp -> data) % 2 != 0){
+            if(oddh == NULL){
+                oddh = temp;
+                oddt = temp;
+            } else {
+                oddt->next = temp;
+                oddt = temp;
+            }
+        } else {
+            if(evenh == NULL){
+                evenh = temp;
+                event = temp;
+            } else {
+                event -> next = temp;
+                event = temp;
+            }
+        }
+        
+        temp = temp -> next;
+    }
+    if(oddh != NULL){
+        oddt->next = evenh;
+    }
+    if(evenh != NULL){
+        event->next = NULL;
+    }
+    
+    if(oddh != NULL){
+        return oddh;
+    }
+    return evenh;
+}
