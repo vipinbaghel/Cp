@@ -1,0 +1,32 @@
+Node *kReverse(Node *head, int k)
+{
+	//Write your code here
+    
+    if(head == NULL){
+        return head;
+    }
+    
+   Node *thead = head->next;
+   Node *ttail = head;
+   
+    int count = 1;
+    while(count < k && thead != NULL){
+        Node *t = thead -> next;
+        thead->next = ttail;
+        ttail = thead;
+        thead = t;
+        count++;
+        
+    }
+    
+    if(thead == NULL){
+        head->next = NULL;
+        return ttail;
+    }
+    
+    
+    Node *smallAns = kReverse(thead, k);
+    head->next = smallAns;
+    return ttail;
+    
+}
