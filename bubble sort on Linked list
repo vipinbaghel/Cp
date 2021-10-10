@@ -1,0 +1,29 @@
+Node *bubbleSort(Node *head)
+{
+	// Write your code here
+    
+    if(head == NULL){
+        return head;
+    }
+    Node *ptr;
+    Node *tail = NULL;
+    int swapped;
+    do{
+        swapped = 0;
+        ptr = head;
+        
+        while( ptr->next != tail){
+            if(ptr->data > ptr -> next -> data){
+                int temp = ptr -> data;
+                ptr -> data = ptr -> next -> data;
+                ptr -> next ->data = temp;
+                swapped = 1;
+            }
+            ptr = ptr -> next;
+        }
+        
+        tail = ptr;
+    }while(swapped);
+    
+    return head;
+}
