@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+TreeNode<int>* maxDataNode(TreeNode<int>* root) {
+    // Write your code here
+    if(root == NULL || root->children.size()==0) {
+        return root;
+    }
+    vector<TreeNode<int>*> ans;
+    
+    for(int i=0; i<root->children.size(); i++){
+        TreeNode<int>* smallAns = maxDataNode(root->children[i]);
+        ans.push_back(smallAns);
+    }
+    
+    int ansIndex = 0;
+    int max = INT_MIN;
+    for(int i=0; i<ans.size(); i++){
+        if(ans[i]->data > max){
+            ansIndex = i;
+            max = ans[i]->data;
+        }
+    }
+    if(ans[ansIndex]->data > root->data){
+        return ans[ansIndex];
+    }else {
+    return root;
+        
+    }
+    
+    
+}
