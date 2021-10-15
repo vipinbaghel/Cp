@@ -1,0 +1,23 @@
+TreeNode<int>* getNextLargerElement(TreeNode<int>* root, int x) {
+    // Write your code here
+    if(root == NULL){
+        return root;
+    }
+    TreeNode<int> *ans = NULL;
+    if(root->data>x){
+        ans = root;
+    }
+    for(int i=0; i<root->children.size(); i++){
+        TreeNode<int> *smallAns = getNextLargerElement(root->children[i],x);
+        if(smallAns != NULL && root != NULL && ans != NULL){
+            if((smallAns->data) < (ans->data)){
+                ans = smallAns;
+            }
+        }
+        else if(smallAns != NULL){
+            ans = smallAns;
+        }
+    }
+    
+    return ans;
+}
