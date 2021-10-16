@@ -1,0 +1,32 @@
+class maxi {
+    public:
+    TreeNode<int>* ansNode;
+    int maxData;
+};
+
+maxi helper(TreeNode<int> *root){
+    maxi ans;
+    ans.ansNode = root;
+    ans.maxData = root->data;
+    
+    
+    for(int i=0; i<root->children.size(); i++){
+        ans.maxData+=root->children[i]->data;
+    }
+    for(int i=0; i<root->children.size(); i++){
+       
+       maxi smallAns = helper(root -> children[i]);
+        if(ans.maxData < smallAns.maxData){
+            ans.ansNode = smallAns.ansNode;
+            ans.maxData = smallAns.maxData;
+        }  
+    }
+    
+    return ans;
+}
+
+TreeNode<int>* maxSumNode(TreeNode<int>* root) {
+    // Write your code here
+    maxi temp = helper(root);
+    return temp.ansNode;
+}
