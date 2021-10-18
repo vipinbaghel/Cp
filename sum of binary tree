@@ -1,0 +1,12 @@
+int getSum(BinaryTreeNode<int>* root) {
+    // Write your code here
+    if(root == NULL){
+        return 0;
+    }
+    
+    int sum = root->data;
+    int leftsum = getSum(root->left);
+    int rightsum = getSum(root->right);
+    
+    return sum+leftsum+rightsum;
+}
