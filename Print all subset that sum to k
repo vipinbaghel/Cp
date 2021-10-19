@@ -1,0 +1,23 @@
+void printSubsetSumToK_helper(int input[], vector<int> output, int size, int k){
+    if(k==0){
+        for(int i=0; i<output.size(); i++){
+            cout<<output[i]<<" ";
+        }
+        cout<<endl;
+        return;
+    }
+    
+    if(size ==0){
+        return;
+    }
+    printSubsetSumToK_helper(input+1,output,size-1,k);
+    output.push_back(input[0]);
+    printSubsetSumToK_helper(input+1,output,size-1,k-input[0]);
+}
+
+
+void printSubsetSumToK(int input[], int size, int k) {
+    vector<int> output;
+    // Write your code here
+    printSubsetSumToK_helper(input,output,size,k);
+}
