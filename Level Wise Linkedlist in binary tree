@@ -1,0 +1,45 @@
+vector<Node<int>*> constructLinkedListForEachLevel(BinaryTreeNode<int> *root) {
+    // Write your code here
+    vector<Node<int>*> v;
+    
+    if(root == NULL){
+        return v;
+    }
+    queue<BinaryTreeNode<int> *> q;
+    q.push(root);
+    while(q.size() != 0){
+        int nodeCount = q.size();
+        Node<int>* head = NULL;
+        Node<int> *tail = NULL;
+        while(nodeCount > 0){
+            BinaryTreeNode<int> *front = q.front();
+            q.pop();
+            if(head == NULL && tail==NULL){
+                head = new Node<int>(front->data); 
+                tail = head;
+                v.push_back(head);
+                
+            }
+            
+            else{
+                Node<int>* temp = new Node<int>(front->data);
+                tail->next = temp;
+                tail = temp;
+            }
+            
+            if(front->left != NULL){
+                q.push(front->left);
+            }
+            
+            if(front->right != NULL){
+                q.push(front->right);
+            }
+            nodeCount--;
+            
+        }
+    }
+    
+    return v;
+    
+}
+
