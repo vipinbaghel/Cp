@@ -1,0 +1,73 @@
+######################################################## Method - 1#############################################
+
+#include <bits/stdc++.h>
+int maximum(BinaryTreeNode<int>* root){
+    int maxi = INT_MIN;
+    if(root == NULL){
+        return maxi;
+    }
+    
+    return max(root->data, max(maximum(root->left), maximum(root->right)));
+}
+
+int minimum(BinaryTreeNode<int> *root){
+    int mini = INT_MAX;
+    if(root == NULL){
+        return mini;
+    }
+    
+    return min(root->data, min(minimum(root->left), minimum(root->right)));
+}
+
+bool isBST(BinaryTreeNode<int> *root) {
+    
+    if(root== NULL){
+        return true;
+    }
+	// Write your code here
+    int maxi = maximum(root->left);
+    int mini = minimum(root->right);
+    
+    if(root->data > maxi && root->data <= mini){
+        return isBST(root->left) && isBST(root->right);
+    } else {
+        return false;
+    }
+    
+    
+    
+}
+############################################################### Method - 2 ######################################################
+
+#include <bits/stdc++.h>
+class check {
+    public:
+    int maxi;
+    int mini;
+    bool isbt;
+};
+
+check helper(BinaryTreeNode<int> *root){
+    
+    check ans;
+    ans.maxi = INT_MIN;
+    ans.mini = INT_MAX;
+    if(root == NULL){
+        ans.isbt = true;
+        return ans;
+    }
+    check leftAns = helper(root->left);
+    check rightAns = helper(root->right);
+    ans.maxi = max(root->data, max(leftAns.maxi, rightAns.maxi));
+    ans.mini = min(root->data, min(leftAns.mini, rightAns.mini));
+    bool isBSTFinal = root->data > leftAns.maxi && root->data <= rightAns.mini && leftAns.isbt && rightAns.isbt;
+    ans.isbt = isBSTFinal;
+    
+    return ans;
+}
+bool isBST(BinaryTreeNode<int> *root) {
+	// Write your code here
+    
+    check final_ans = helper(root);
+    return final_ans.isbt;
+}
