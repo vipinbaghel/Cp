@@ -1,0 +1,46 @@
+pair<Node<int>* ,Node<int>*> helper(BinaryTreeNode<int> *root){
+    if(root == NULL){
+        pair<Node<int>*, Node<int>*> ans;
+        ans.first = NULL;
+        ans.second = NULL;
+        return ans;
+    }
+    
+    
+    pair<Node<int>* ,Node<int>* > leftAns = helper(root->left);
+    pair<Node<int>* ,Node<int>* > rightAns = helper(root->right);
+    
+    pair<Node<int>* ,Node<int>*> finalAns;
+    
+    Node<int> * temp = new Node<int>(root->data);
+    if(leftAns.first == NULL && rightAns.first == NULL){
+        finalAns.first = temp;
+        finalAns.second = temp;
+    }
+    
+    else if(leftAns.first == NULL){
+        finalAns.first  = temp;
+        temp->next = rightAns.first;
+        finalAns.second = rightAns.second;
+    } else if(rightAns.first == NULL){
+        finalAns.first = leftAns.first;
+        leftAns.second->next = temp;
+        finalAns.second = temp;
+    } else {
+        finalAns.first = leftAns.first;
+        leftAns.second->next = temp;
+        temp->next = rightAns.first;
+        finalAns.second = rightAns.second;
+    }
+    
+    
+    return finalAns;
+    
+}
+
+
+Node<int>* constructLinkedList(BinaryTreeNode<int>* root) {
+	// Write your code here
+    pair<Node<int>*,Node<int>*> ans = helper(root);
+    return ans.first;
+}
