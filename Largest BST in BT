@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+class GiveLargest {
+    public:
+    int minimum;
+    int maximum;
+    bool isBST;
+    int largestBSt;
+};
+
+
+GiveLargest helper(BinaryTreeNode<int>* root){
+    GiveLargest ans;
+    if(root == NULL){
+        ans.minimum = INT_MAX;
+        ans.maximum = INT_MIN;
+        ans.isBST = true;
+        ans.largestBSt=0;
+        return ans;
+    }
+    
+    GiveLargest leftAns = helper(root->left);
+    GiveLargest rightAns = helper(root->right);
+    
+    if(leftAns.isBST && rightAns.isBST){
+        if(leftAns.maximum < root->data && rightAns.minimum > root->data){
+            ans.isBST = true;
+            ans.minimum = min(leftAns.minimum,root->data);
+            ans.maximum = max(rightAns.maximum,root->data);
+            ans.largestBSt = max(leftAns.largestBSt , rightAns.largestBSt)+1;
+            return ans;
+        } else {
+            ans.isBST = false;
+            ans.minimum = min(leftAns.minimum,root->data);
+            ans.maximum = max(rightAns.maximum,root->data);
+            ans.largestBSt = max(leftAns.largestBSt , rightAns.largestBSt);
+            return ans;
+        }
+    } else {
+        ans.isBST = false;
+        ans.minimum = min(leftAns.minimum,root->data);
+        ans.maximum = max(rightAns.maximum,root->data);
+        ans.largestBSt = max(leftAns.largestBSt , rightAns.largestBSt);
+        return ans;
+    }
+}
+
+int largestBSTSubtree(BinaryTreeNode<int> *root) {
+    // Write your code here
+    GiveLargest ans = helper(root);
+    return ans.largestBSt;
+}
