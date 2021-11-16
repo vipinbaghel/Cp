@@ -1,0 +1,40 @@
+void addNodes(BinaryTreeNode<int>* root, vector<int>* nodes) {
+    if(root == NULL){
+        return;
+    }
+    
+    addNodes(root->left, nodes);
+    nodes->push_back(root->data);
+    addNodes(root->right, nodes);
+}
+
+
+void printPairs(BinaryTreeNode<int>* root, int sum, vector<int>* nodes){
+    if(root == NULL){
+        return;
+    }
+    int i = 0;
+    unsigned long j = nodes->size()-1;
+    while (i<j) {
+        int data = nodes->at(i) + nodes->at(j);
+        if(data > sum)
+            j--;
+        else if (data < sum)
+            i++;
+        else {
+            cout<<nodes->at(i)<<" "<<nodes->at(j)<<endl;
+            i++;
+            j--;
+        }
+    }
+}
+// Best Approach: Time Complexity O(nlogn) for binary Tree and O(n)
+void printNodesSumToS(BinaryTreeNode<int> *root, int sum) {
+    if(root == NULL){
+        return;
+    }
+    vector<int>* nodes = new vector<int>();
+    addNodes(root, nodes);
+    printPairs(root, sum, nodes);
+    
+}
