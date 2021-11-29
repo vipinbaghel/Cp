@@ -1,0 +1,33 @@
+#include <unordered_map>
+int pairSum(int *arr, int n) {
+	// Write your code here
+    unordered_map<int,int> hash;
+    
+    
+    for(int i=0; i<n; i++){
+        hash[arr[i]]++;
+    }
+    int count = 0;
+    for(int i=0; i<n; i++){
+        
+        if(hash.count(arr[i]) > 0 && hash.count(-arr[i]) > 0){
+            int find = -arr[i];
+           int num = hash[find];
+            
+           if(find == 0){
+            count = count+(hash[find]*(hash[find]-1))/2;
+            
+           } 
+        
+           else {
+            count = count+num*hash[arr[i]];
+           }
+        
+           hash.erase(arr[i]);
+           hash.erase(find);
+        }
+        
+        
+    }
+    return count;
+}
