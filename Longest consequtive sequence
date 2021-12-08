@@ -1,0 +1,47 @@
+#include <unordered_map>
+
+vector<int> longestConsecutiveIncreasingSequence(int *arr, int n) {
+    // Your Code goes here
+    
+    unordered_map<int,int> isPresent;
+    for(int i=0; i<n; i++){
+        isPresent[arr[i]]++;
+    }
+    
+    vector<int> ans;
+    int count = 0; 
+    int maxi = 0;
+    int first=arr[0];
+    int second = arr[0];
+    for(int i=0; i<n; i++){
+        int element = arr[i] - 1;
+        int greater = arr[i] + 1;
+        while(isPresent.find(element) != isPresent.end()){
+            count++;
+            // isPresent.erase(element);
+            element--;
+        }
+        
+//         while(isPresent.find(greater) != isPresent.end()){
+//             count++;
+//             isPresent.erase(greater);
+//             greater++;
+//         }
+        
+        if(count >= maxi){
+            maxi = count;
+            first = element+1;
+            second = greater-1;
+            count = 0;
+        }
+        else {
+            count = 0;
+        }
+        
+    }
+    
+    ans.push_back(first);
+    ans.push_back(second);
+    return ans;
+    
+}
