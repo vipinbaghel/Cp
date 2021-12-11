@@ -1,0 +1,49 @@
+int helper(int n, int *steps){
+    if(n == 1){
+        steps[1] = 0;
+        return steps[n];
+    }
+    
+    int x = INT_MAX;
+    int y=INT_MAX;
+    int z = INT_MAX;
+    
+    if(steps[n-1] != -1){
+        x = steps[n-1];
+    } else {
+        x = helper(n-1, steps);
+        steps[n-1] = x;
+    }
+    
+    if(n%2 == 0){
+        if(steps[n/2] !=-1)
+           y = steps[n/2];
+        else {
+           y = helper(n/2,steps);
+           steps[n/2] = y;
+        }
+    }
+    
+    if(n%3 == 0){
+        if(steps[n/3] != -1){
+            z = steps[n/3];
+        } else {
+            z = helper(n/3,steps);
+            steps[n/3] = z;
+        }
+    }
+    
+    return min(x, min(y,z)) + 1;
+}
+
+int countStepsToOne(int n)
+{
+	//Write your code here
+    int *steps = new int[n];
+    
+    for(int i=0; i<n; i++){
+        steps[i] = -1;
+    }
+    
+    return helper(n,steps);
+}
