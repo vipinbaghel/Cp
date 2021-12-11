@@ -1,0 +1,27 @@
+// Brute force Approach
+
+int minCount(int n)
+{
+	//Write your code here
+    if(n<0){
+        return 0;
+    }
+    
+    if(n <= 3){
+        return n;
+    }
+    
+    int i=1;
+    int count = n;
+    while(i*i<=n){
+        int smallAns = minCount(n-i*i);
+        if(smallAns < count){
+            count = smallAns;
+        }
+        i++;
+    }
+    
+    return count+1;
+}
+
+//Memoization Approach
