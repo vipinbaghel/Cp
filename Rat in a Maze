@@ -1,0 +1,61 @@
+/*
+	Note:
+	To get all the test cases accepted, make recursive calls in following order: Top, Down, Left, Right.
+	This means that if the current cell is (x, y), then order of calls should be: top cell (x-1, y), 
+	down cell (x+1, y), left cell (x, y-1) and right cell (x, y+1).
+*/
+#include<bits/stdc++.h>
+using namespace std;
+
+int output[20][20];
+
+void printPathHelper(int n,int row,int column,int input[][20]){
+    if(row == n-1 && column == n-1){
+        output[row][column] = 1;
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                cout<<output[i][j]<<" ";
+            }
+        }
+        output[row][column] = 0;
+        cout<<endl;
+        return;
+    }
+    
+    if(row>n-1 || row <0 || column >n-1 || column <0 || input[row][column] == 0 || output[row][column] == 1){
+        return;
+    }
+    
+    output[row][column] = 1;
+    
+    printPathHelper(n,row-1,column,input);
+    printPathHelper(n,row+1,column,input);
+    printPathHelper(n,row, column-1,input);
+    printPathHelper(n,row,column+1,input);
+    output[row][column] = 0;
+    
+    return;
+    
+    
+    
+}
+
+void printPath(int n,int input[][20]){
+    memset(output,0, 20*20*sizeof(int));
+    printPathHelper(n,0,0,input);
+}
+int main() {
+
+	// Write your code here
+    
+    int n;
+    cin>>n;
+    int input[n][20];
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            cin>>input[i][j];
+        }
+    }
+    printPath(n,input);
+	return 0;
+}
